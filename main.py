@@ -53,7 +53,7 @@ def menu_zlo(message):
 
 
 @bot.callback_query_handler(func=lambda call: True)
-def menu_zlo_answer(call):
+def menu_answer(call):
     bot.answer_callback_query(callback_query_id=call.id,
                               text="Загрузка, ждите...")
     if call.data == 'terminal':
