@@ -3,10 +3,12 @@ from telebot import types
 from googleSheets import *
 
 # config start
-_pin = 132252
-token = '6876606751:AAHeG_uIi4z5q0FJHCsItONORY-Uim3XNGE'
-spreadsheet_id = '1y8GEKuaH2vYmerQm_sapIwf1Sf7BnpKSTkF4z5cuEkE'
-account_file = 'server.json'
+
+_pin = 1 # пинкод вашего бота (см п.1 readme)
+token = ' ' # токен вашего тг бота (см п.2 readme)
+spreadsheet_id = ' ' # id таблицы(см п.3 readme)
+account_file = ' ' # расположение json файла с сервис учёткой(см п.4 readme)
+
 # config end
 table = Table(account_file=account_file, spreadsheet_id=spreadsheet_id)
 user_status = {}
