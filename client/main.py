@@ -1,10 +1,10 @@
 from googleSheets import *
 import time
 import os
-delay = 3
 # config start
 account_file = 'client.json'
 spreadsheet_id = '1y8GEKuaH2vYmerQm_sapIwf1Sf7BnpKSTkF4z5cuEkE' # id гугл таблицы, можно найти в ссылке на таблицу после /d и до /edit
+delay = 3
 # config end
 table = Table(account_file=account_file, spreadsheet_id=spreadsheet_id)
 while True:
