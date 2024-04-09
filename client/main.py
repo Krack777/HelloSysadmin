@@ -4,9 +4,9 @@ import subprocess
 import time
 import os
 # config start
-account_file = 'client.json' #см п.4 раздела "Установка бота и клиента(удалённого пк/доски)"
-spreadsheet_id = '1y8GEKuaH2vYmerQm_sapIwf1Sf7BnpKSTkF4z5cuEkE' #см п.3 раздела "Установка бота и клиента(удалённого пк/доски)"
-delay = '3'
+account_file = 'client.json'  # расположение json файла с сервис учёткой(см п.4 readme "#см п.3 раздела "Установка бота и клиента(удалённого пк/доски)")
+spreadsheet_id = '1y8GEKuaH2vYmerQm_sapIwf1Sf7BnpKSTkF4z5cuEkE' # id таблицы(см п.3 readme "#см п.3 раздела "Установка бота и клиента(удалённого пк/доски)")
+delay = '3' #Задержка парсинга таблицы на команды(см п.1 Раздела "Пинкод" и "Задержка клиента")
 # config end
 
 processes = subprocess.getoutput("pgrep -f updater_client.py").split()
