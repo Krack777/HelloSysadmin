@@ -1,4 +1,5 @@
 from googleSheets import *
+import signal
 import subprocess
 import time
 import os
