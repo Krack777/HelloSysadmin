@@ -44,16 +44,17 @@ def menu_zlo(message):
         bot.send_message(message.from_user.id, 'Вы не авторизованы! Введите пин код через /pin (пин-код)')
         return
     markup = types.InlineKeyboardMarkup()
-    zlo1 = types.InlineKeyboardButton('Терминал', callback_data='terminal')
-    zlo2 = types.InlineKeyboardButton('Программа', callback_data='run')
-    zlo3 = types.InlineKeyboardButton('Картинка', callback_data='pic')
-    zlo4 = types.InlineKeyboardButton('Аудио', callback_data='audio')
-    markup.add(zlo1, zlo2, zlo3, zlo4)
+    btn1 = types.InlineKeyboardButton('Терминал', callback_data='terminal')
+    btn2 = types.InlineKeyboardButton('Программа', callback_data='run')
+    btn3 = types.InlineKeyboardButton('Картинка', callback_data='pic')
+    btn4 = types.InlineKeyboardButton('Аудио', callback_data='audio')
+    btn5 = types.InlineKeyboardButton('Запустить обновление', callback_data='update_True')
+    markup.add(btn1, btn2, btn3, btn4, btn5)
     bot.send_message(message.chat.id, 'Выберете, что запускать из списка', reply_markup=markup)
 
 
 @bot.callback_query_handler(func=lambda call: True)
-def menu_answer(call):
+def menu_zlo_answer(call):
     bot.answer_callback_query(callback_query_id=call.id,
                               text="Загрузка, ждите...")
     if call.data == 'terminal':
@@ -64,16 +65,10 @@ def menu_answer(call):
         bot.send_message(call.message.chat.id, 'Введите название программы для её запуска')
         user_status[call.from_user.id] = 'ожидает_ввода_программы'
 
-    elif call.data == 'update_rebootNow':
-        table.write('update=rebootNow')
-        bot.send_message(call.message.chat.id, 'Обновление с перезагрузкой из репозитория GitHub запустится в '
+    elif call.data == 'update_True':
+        table.write('update=True')
+        bot.send_message(call.message.chat.id, 'Обновление из репозитория GitHub запустится в '
                                                'ближайшее время')
-
-    elif call.data == 'update_rebootLater':
-        table.write('update=rebootLater')
-        bot.send_message(call.message.chat.id, 'Обновление без перезагрузки из репозитория GitHub запустится в '
-                                               'ближайшее время')
-
     elif call.data == 'pic':
         bot.send_message(call.message.chat.id, 'Введите название картинки')
         user_status[call.from_user.id] = 'ожидает_ввода_картинки'
@@ -150,3 +145,4 @@ def clear(message):
 
 
 bot.polling(none_stop=True)
+
