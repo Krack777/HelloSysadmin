@@ -4,8 +4,8 @@ import subprocess
 import time
 import os
 # config start
-account_file = 'client.json'
-spreadsheet_id = '1y8GEKuaH2vYmerQm_sapIwf1Sf7BnpKSTkF4z5cuEkE' # id гугл таблицы, можно найти в ссылке на таблицу после /d и до /edit
+account_file = 'client.json' #см п.4 раздела "Установка бота и клиента(удалённого пк/доски)"
+spreadsheet_id = '1y8GEKuaH2vYmerQm_sapIwf1Sf7BnpKSTkF4z5cuEkE' #см п.3 раздела "Установка бота и клиента(удалённого пк/доски)"
 delay = '3'
 # config end
 
