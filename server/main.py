@@ -13,7 +13,6 @@ user_status = {}
 bot = telebot.TeleBot(token)
 trusted_users = []
 
-
 @bot.message_handler(commands=['start', 'help'])
 def send_message(message):
     bot.reply_to(message, 'Здравствуйте, этот бот для удалённого доступа к эл. доске, все разработчики  уже давно в '
@@ -47,6 +46,7 @@ def menu_zlo(message):
     btn3 = types.InlineKeyboardButton('Картинка', callback_data='pic')
     btn4 = types.InlineKeyboardButton('Аудио', callback_data='audio')
     btn5 = types.InlineKeyboardButton('Запустить обновление', callback_data='update_True')
+    btn5 = types.InlineKeyboardButton('Закрыть OpenBoard', callback_data='close_OpenBoard')
     markup.add(btn1, btn2, btn3, btn4, btn5)
     bot.send_message(message.chat.id, 'Выберете, что запускать из списка', reply_markup=markup)
 
@@ -58,6 +58,10 @@ def menu_zlo_answer(call):
     if call.data == 'terminal':
         bot.send_message(call.message.chat.id, 'Введите команду для выполнения в терминале')
         user_status[call.from_user.id] = 'ожидает_ввода_команды'
+
+    elif call.data == 'close_OpenBoard':
+        bot.send_message(call.message.chat.id, 'OpenBoard в ближайшее время закроется')
+        user_status[call.from_user.id] = 'close_OpenBoard'
 
     elif call.data == 'run':
         bot.send_message(call.message.chat.id, 'Введите название программы для её запуска')
@@ -77,6 +81,14 @@ def menu_zlo_answer(call):
 
     else:
         bot.send_message(call.message.chat.id, "Что-то пошло не так, попробуйте заново.")
+
+
+@bot.message_handler(func=lambda message: user_status.get(message.from_user.id) == 'close_OpenBoard')
+def command_start_table(message):
+    message = 'close_OpenBoard'
+    table.write(message)
+    user_status.pop(message.from_user.id, None)
+    bot.send_message(message.chat.id, 'OpenBoard скоро закроется.')
 
 
 @bot.message_handler(func=lambda message: user_status.get(message.from_user.id) == 'ожидает_ввода_программы')
@@ -143,4 +155,3 @@ def clear(message):
 
 
 bot.polling(none_stop=True)
-
